@@ -30,8 +30,8 @@ global.isagiJadibts = true
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
-global.botname = "ISAGI BOT"
-global.textbot = "isagi, mᥲძᥱ ᥕі𝗍һ ᑲᥡ ⁱᵃᵐ|gabriel"
+global.botname = "*ITACHI-BOT*"
+global.textbot = "ITACHI, mᥲძᥱ ᥕі𝗍һ ᑲᥡ ⁱᵃᵐ|gabriel"
 global.dev = "© ⍴᥆ᥕᥱrᥱძ ᑲᥡ ⁱᵃᵐ|gabriel"
 global.author = "© mᥲძᥱ ᥕі𝗍һ ᑲᥡ ⁱᵃᵐ|gabriel"
 global.etiqueta = "ⁱᵃᵐ|gabriel"
