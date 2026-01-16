@@ -115,7 +115,7 @@ handler.tags = ['descargas']
 handler.command = ['ytmp3', 'yta', 'ytmp3vd']
 
 handler2.help = ['ytmp4 <link>']
-handler2.tags = ['descargas']
+handler2.tags = ['downloader']
 handler2.command = ['ytmp4', 'ytv', 'ytvideovd']
 
 export default handler
