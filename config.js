@@ -36,8 +36,8 @@ global.dev = "© ⍴᥆ᥕᥱrᥱძ ᑲᥡ ⁱᵃᵐ|gabriel"
 global.author = "© mᥲძᥱ ᥕі𝗍һ ᑲᥡ ⁱᵃᵐ|gabriel"
 global.etiqueta = "ⁱᵃᵐ|gabriel"
 global.currency = "¥enes"
-global.banner = "https://o.uguu.se/vEXqDRPT.jpg"
-global.icono = "https://o.uguu.se/vEXqDRPT.jpg"
+global.banner = "https://raw.githubusercontent.com/El-brayan502/dat2/main/uploads/04482e-1768593695475.jpg"
+global.icono = "https://raw.githubusercontent.com/El-brayan502/dat2/main/uploads/04482e-1768593695475.jpg"
 global.catalogo = fs.readFileSync('./lib/catalogo.jpg')
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
