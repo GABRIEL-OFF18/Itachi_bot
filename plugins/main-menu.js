@@ -28,7 +28,7 @@ let handler = async (m, { conn, usedPrefix }) => {
   let header = '*– %category*'
   let body = '│  ◦ %cmd'
   let footer = '└––'
-  let after = `✨ Isagi-bot-MD - Tu asistente  de anime favorito`
+  let after = `✨ ITACHI-BOT-MD - Tu asistente  de anime favorito`
 
   // 📊 Datos del usuario/bot
   let user = global.db.data.users[m.sender]
@@ -48,7 +48,7 @@ let handler = async (m, { conn, usedPrefix }) => {
 
   let infoUser = `
 ʜᴏʟᴀ, ${nombre}
-ꜱᴏʏ ITACHI, ʟɪꜱᴛᴏ ᴘᴀʀᴀ ᴀʏᴜᴅᴀʀᴛᴇ
+ꜱᴏʏ *ITACHI*, ʟɪꜱᴛᴏ ᴘᴀʀᴀ ᴀʏᴜᴅᴀʀᴛᴇ
 
 *乂 ɪɴꜰᴏ ᴅᴇʟ ᴜꜱᴜᴀʀɪᴏ*
 ┌  ◦ ᴇꜱᴛᴀᴅᴏ: ᴜꜱᴜᴀʀɪᴏ
