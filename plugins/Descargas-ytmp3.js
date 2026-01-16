@@ -111,7 +111,7 @@ let handler2 = async (m, { conn, args, command }) => {
 }
 
 handler.help = ['ytmp3 <link>']
-handler.tags = ['dl']
+handler.tags = ['descargas']
 handler.command = ['ytmp3', 'yta', 'ytmp3vd']
 
 handler2.help = ['ytmp4 <link>']
