@@ -48,7 +48,7 @@ let handler = async (m, { conn, usedPrefix }) => {
 
   let infoUser = `
 ʜᴏʟᴀ, ${nombre}
-ꜱᴏʏ Isagi, ʟɪꜱᴛᴏ ᴘᴀʀᴀ ᴀʏᴜᴅᴀʀᴛᴇ
+ꜱᴏʏ ITACHI, ʟɪꜱᴛᴏ ᴘᴀʀᴀ ᴀʏᴜᴅᴀʀᴛᴇ
 
 *乂 ɪɴꜰᴏ ᴅᴇʟ ᴜꜱᴜᴀʀɪᴏ*
 ┌  ◦ ᴇꜱᴛᴀᴅᴏ: ᴜꜱᴜᴀʀɪᴏ
@@ -105,7 +105,7 @@ END:VCARD`
     },
     message: {
       contactMessage: {
-        displayName: "I S A G I -  B O T",
+        displayName: "I T A C H I -  B O T",
         vcard: vcard,
       },
     },
@@ -114,7 +114,7 @@ END:VCARD`
   // 📄 Envío estilo PDF con contacto falso
   await conn.sendMessage(m.chat, {
     document: fs.readFileSync('./package.json'),
-    fileName: '🌸 isagi - ᑲ᥆𝗍 🌸',
+    fileName: '🌸 ITACHI - BOT 🌸',
     mimetype: 'application/pdf',
     caption: finalMenu,
     contextInfo: {
