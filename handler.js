@@ -131,7 +131,7 @@ gponly: false
 }}} catch (e) {
 console.error(e)
 }
-
+ 
 if (typeof m.text !== "string") m.text = ""
 const user = global.db.data.users[m.sender]
 try {
@@ -246,9 +246,9 @@ cmd.test(command) : cmd === command) :
 typeof plugin.command === "string" ?
 plugin.command === command : false
 global.comando = command
-
+                        
 if ((m.id.startsWith("NJX-") || (m.id.startsWith("BAE5") && m.id.length === 16) || (m.id.startsWith("B24E") && m.id.length === 20))) return
-
+  
 // Primary by: Alex 🐼
 if (global.db.data.chats[m.chat].primaryBot && global.db.data.chats[m.chat].primaryBot !== this.user.jid) {
 const primaryBotConn = global.conns.find(conn => conn.user.jid === global.db.data.chats[m.chat].primaryBot && conn.ws.socket && conn.ws.socket.readyState !== ws.CLOSED)
