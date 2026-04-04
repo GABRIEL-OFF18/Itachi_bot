@@ -113,6 +113,12 @@ do {
 opcion = await question(colors("Seleccione una opción:\n") + qrOption("1. Con código QR\n") + textOption("2. Con código de texto\n--> "))
 } while (!/^[1-2]$/.test(opcion))
 }
+
+if (opcion == '2') {
+phoneNumber = await question(colors('Ingresa tu número (ejem: 573244278232):\n--> '))
+phoneNumber = phoneNumber.replace(/[^0-9]/g, '')
+}
+
 const connectionOptions = {
 logger: pino({ level: 'silent' }),
 printQRInTerminal: opcion == '1',
@@ -143,11 +149,19 @@ maxIdleTimeMs: 60000
 
 global.conn = makeWASocket(connectionOptions)
 conn.ev.on("creds.update", saveCreds)
+
 async function connectionUpdate(update) {
 const { connection, lastDisconnect, isNewLogin } = update
 if (isNewLogin) conn.isInit = true
 
 const code = lastDisconnect?.error?.output?.statusCode
+
+if (opcion == '2' && !conn.authState.creds.registered) {
+await delay(3000)
+let code = await conn.requestPairingCode(phoneNumber)
+code = code?.match(/.{1,4}/g)?.join('-') || code
+console.log(chalk.cyan(`Tu código de vinculación: ${chalk.bold(code)}`))
+}
 
 if (connection === "open") {
 console.log(chalk.green("Conectado"))
