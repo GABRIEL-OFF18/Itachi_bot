@@ -150,25 +150,21 @@ maxIdleTimeMs: 60000
 global.conn = makeWASocket(connectionOptions)
 conn.ev.on("creds.update", saveCreds)
 
-async function connectionUpdate(update) {
-const { connection, lastDisconnect, isNewLogin } = update
-if (isNewLogin) conn.isInit = true
-
-const code = lastDisconnect?.error?.output?.statusCode
-
-if (connection === "connecting") {
 if (opcion == '2' && !conn.authState.creds.registered) {
 setTimeout(async () => {
 let pairCode = await conn.requestPairingCode(phoneNumber)
 pairCode = pairCode?.match(/.{1,4}/g)?.join('-') || pairCode
 console.log(chalk.cyan(`Tu código de vinculación: ${chalk.bold(pairCode)}`))
-}, 3000)
-}}
+}, 500)
+}
 
+async function connectionUpdate(update) {
+const { connection, lastDisconnect, isNewLogin } = update
+if (isNewLogin) conn.isInit = true
+const code = lastDisconnect?.error?.output?.statusCode
 if (connection === "open") {
 console.log(chalk.green("Conectado"))
 }
-
 if (connection === "close") {
 if (code !== DisconnectReason.loggedOut) {
 await global.reloadHandler(true)
