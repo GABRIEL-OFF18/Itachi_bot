@@ -5,6 +5,7 @@ import fs, { unwatchFile, watchFile } from "fs"
 import chalk from "chalk"
 import fetch from "node-fetch"
 import ws from "ws"
+import { smsg } from "./lib/simple.js"
 
 const { proto } = (await import("@whiskeysockets/baileys")).default
 const isNumber = x => typeof x === "number" && !isNaN(x)
@@ -20,11 +21,11 @@ if (!chatUpdate) return
 this.pushMessage(chatUpdate.messages).catch(console.error)
 let m = chatUpdate.messages[chatUpdate.messages.length - 1]
 if (!m) return
+m = smsg(global.conn, m)
+if (!m) return
 if (global.db.data == null)
 await global.loadDatabase()
 try {
-m = m
-if (!m) return
 m.exp = 0
 try {
 if (!global.db) global.db = {}
