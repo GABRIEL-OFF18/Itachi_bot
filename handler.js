@@ -1,4 +1,3 @@
-import { smsg } from "./lib/simple.js"
 import { format } from "util"
 import { fileURLToPath } from "url"
 import path, { join } from "path"
@@ -24,7 +23,7 @@ if (!m) return
 if (global.db.data == null)
 await global.loadDatabase()
 try {
-m = smsg(this, m) || m
+m = m
 if (!m) return
 m.exp = 0
 try {
@@ -131,23 +130,23 @@ gponly: false
 }}} catch (e) {
 console.error(e)
 }
- 
+
 if (typeof m.text !== "string") m.text = ""
 const user = global.db.data.users[m.sender]
 try {
-const actual = user.name || ""
+const actual = user?.name || ""
 const nuevo = m.pushName || await this.getName(m.sender)
 if (typeof nuevo === "string" && nuevo.trim() && nuevo !== actual) {
-user.name = nuevo
+if (user) user.name = nuevo
 }} catch {}
 const chat = global.db.data.chats[m.chat]
-const settings = global.db.data.settings[this.user.jid]  
+const settings = global.db.data.settings[this.user.jid]
 const isROwner = [...global.owner.map((number) => number)].map(v => v.replace(/[^0-9]/g, "") + "@s.whatsapp.net").includes(m.sender)
 const isOwner = isROwner || m.fromMe
 const isPrems = isROwner || global.prems.map(v => v.replace(/[^0-9]/g, "") + "@s.whatsapp.net").includes(m.sender) || user?.premium == true
-const isOwners = [this.user.jid, ...global.owner.map((number) => number + "@s.whatsapp.net")].includes(m.sender);
-if (settings.self && !isOwners) return
-if (settings.gponly && !isOwners && !m.chat.endsWith('g.us') && !/code|p|ping|qr|estado|status|infobot|botinfo|report|reportar|invite|join|logout|suggest|help|menu/gim.test(m.text)) return
+const isOwners = [this.user.jid, ...global.owner.map((number) => number + "@s.whatsapp.net")].includes(m.sender)
+if (settings?.self && !isOwners) return
+if (settings?.gponly && !isOwners && !m.chat.endsWith('g.us') && !/code|p|ping|qr|estado|status|infobot|botinfo|report|reportar|invite|join|logout|suggest|help|menu/gim.test(m.text)) return
 if (opts["queque"] && m.text && !(isPrems)) {
 const queque = this.msgqueque, time = 1000 * 5
 const previousID = queque[queque.length - 1]
@@ -246,10 +245,9 @@ cmd.test(command) : cmd === command) :
 typeof plugin.command === "string" ?
 plugin.command === command : false
 global.comando = command
-                        
+
 if ((m.id.startsWith("NJX-") || (m.id.startsWith("BAE5") && m.id.length === 16) || (m.id.startsWith("B24E") && m.id.length === 20))) return
-  
-// Primary by: Alex 🐼
+
 if (global.db.data.chats[m.chat].primaryBot && global.db.data.chats[m.chat].primaryBot !== this.user.jid) {
 const primaryBotConn = global.conns.find(conn => conn.user.jid === global.db.data.chats[m.chat].primaryBot && conn.ws.socket && conn.ws.socket.readyState !== ws.CLOSED)
 const participants = m.isGroup ? (await this.groupMetadata(m.chat).catch(() => ({ participants: [] }))).participants : []
@@ -273,13 +271,13 @@ const aviso = `ꕥ El bot *${botname}* está desactivado en este grupo\n\n> ✦ 
 await m.reply(aviso)
 return
 }}
-if (m.text && user.banned && !isROwner) {
+if (m.text && user?.banned && !isROwner) {
 const mensaje = `ꕥ Estas baneado/a, no puedes usar comandos en este bot!\n\n> ● *Razón ›* ${user.bannedReason}\n\n> ● Si este Bot es cuenta oficial y tienes evidencia que respalde que este mensaje es un error, puedes exponer tu caso con un moderador.`.trim()
 if (!primaryBotId || primaryBotId === botId) {
 m.reply(mensaje)
 return
 }}}
-const adminMode = chat.modoadmin || false
+const adminMode = chat?.modoadmin || false
 const wa = plugin.botAdmin || plugin.admin || plugin.group || plugin || noPrefix || pluginPrefix || m.text.slice(0, 1) === pluginPrefix || plugin.command
 if (adminMode && !isOwner && m.isGroup && !isAdmin && wa) return
 if (plugin.rowner && plugin.owner && !(isROwner || isOwner)) {
@@ -373,13 +371,13 @@ console.log(m.message)
 
 global.dfail = (type, m, conn) => {
 const msg = {
-rowner: `『✦』El comando *${comando}* solo puede ser usado por los creadores del bot.`, 
-owner: `『✦』El comando *${comando}* solo puede ser usado por los desarrolladores del bot.`, 
-mods: `『✦』El comando *${comando}* solo puede ser usado por los moderadores del bot.`, 
-premium: `『✦』El comando *${comando}* solo puede ser usado por los usuarios premium.`, 
+rowner: `『✦』El comando *${comando}* solo puede ser usado por los creadores del bot.`,
+owner: `『✦』El comando *${comando}* solo puede ser usado por los desarrolladores del bot.`,
+mods: `『✦』El comando *${comando}* solo puede ser usado por los moderadores del bot.`,
+premium: `『✦』El comando *${comando}* solo puede ser usado por los usuarios premium.`,
 group: `『✦』El comando *${comando}* solo puede ser usado en grupos.`,
 private: `『✦』El comando *${comando}* solo puede ser usado al chat privado del bot.`,
-admin: `『✦』El comando *${comando}* solo puede ser usado por los administradores del grupo.`, 
+admin: `『✦』El comando *${comando}* solo puede ser usado por los administradores del grupo.`,
 botAdmin: `『✦』Para ejecutar el comando *${comando}* debo ser administrador del grupo.`,
 restrict: `『✦』Esta caracteristica está desactivada.`
 }[type]
