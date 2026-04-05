@@ -197,14 +197,14 @@ return true
 }
 
 await global.reloadHandler()
-const pluginFolder = global.__dirname(join(__dirname, './plugins'))
+const pluginFolder = join(__dirname, './plugins')
 const pluginFilter = (filename) => /\.js$/.test(filename)
 global.plugins = {}
 
 async function filesInit() {
 for (const filename of readdirSync(pluginFolder).filter(pluginFilter)) {
 try {
-const file = global.__filename(join(pluginFolder, filename))
+const file = join(pluginFolder, filename)
 const module = await import(file)
 global.plugins[filename] = module.default || module
 console.log(chalk.green(`Plugin cargado: ${filename}`))
@@ -217,13 +217,13 @@ await filesInit()
 
 global.reload = async (_ev, filename) => {
 if (pluginFilter(filename)) {
-const dir = global.__filename(join(pluginFolder, filename), true)
+const dir = join(pluginFolder, filename)
 const err = syntaxerror(readFileSync(dir), filename, {
 sourceType: 'module',
 allowAwaitOutsideFunction: true
 })
 if (!err) {
-const module = await import(`${global.__filename(dir)}?update=${Date.now()}`)
+const module = await import(`${dir}?update=${Date.now()}`)
 global.plugins[filename] = module.default || module
 }}
 }
