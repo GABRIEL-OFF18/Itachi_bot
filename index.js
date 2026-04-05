@@ -156,12 +156,14 @@ if (isNewLogin) conn.isInit = true
 
 const code = lastDisconnect?.error?.output?.statusCode
 
+if (connection === "connecting") {
 if (opcion == '2' && !conn.authState.creds.registered) {
-await delay(3000)
-let code = await conn.requestPairingCode(phoneNumber)
-code = code?.match(/.{1,4}/g)?.join('-') || code
-console.log(chalk.cyan(`Tu código de vinculación: ${chalk.bold(code)}`))
-}
+setTimeout(async () => {
+let pairCode = await conn.requestPairingCode(phoneNumber)
+pairCode = pairCode?.match(/.{1,4}/g)?.join('-') || pairCode
+console.log(chalk.cyan(`Tu código de vinculación: ${chalk.bold(pairCode)}`))
+}, 3000)
+}}
 
 if (connection === "open") {
 console.log(chalk.green("Conectado"))
@@ -171,8 +173,7 @@ if (connection === "close") {
 if (code !== DisconnectReason.loggedOut) {
 await global.reloadHandler(true)
 }
-}
-}
+}}
 
 process.on('uncaughtException', console.error)
 let handler = await import('./handler.js')
