@@ -139,14 +139,14 @@ const nuevo = m.pushName || await this.getName(m.sender)
 if (typeof nuevo === "string" && nuevo.trim() && nuevo !== actual) {
 if (user) user.name = nuevo
 }} catch {}
-const chat = global.db.data.chats[m.chat]
-const settings = global.db.data.settings[this.user.jid]
+const chat = global.db.data.chats?.[m.chat]
+const settings = global.db.data.settings?.[this.user?.jid]
 const isROwner = [...global.owner.map((number) => number)].map(v => v.replace(/[^0-9]/g, "") + "@s.whatsapp.net").includes(m.sender)
 const isOwner = isROwner || m.fromMe
 const isPrems = isROwner || global.prems.map(v => v.replace(/[^0-9]/g, "") + "@s.whatsapp.net").includes(m.sender) || user?.premium == true
 const isOwners = [this.user.jid, ...global.owner.map((number) => number + "@s.whatsapp.net")].includes(m.sender)
 if (settings?.self && !isOwners) return
-if (settings?.gponly && !isOwners && !m.chat.endsWith('g.us') && !/code|p|ping|qr|estado|status|infobot|botinfo|report|reportar|invite|join|logout|suggest|help|menu/gim.test(m.text)) return
+if (settings?.gponly && !isOwners && !m.chat?.endsWith('g.us') && !/code|p|ping|qr|estado|status|infobot|botinfo|report|reportar|invite|join|logout|suggest|help|menu/gim.test(m.text)) return
 if (opts["queque"] && m.text && !(isPrems)) {
 const queque = this.msgqueque, time = 1000 * 5
 const previousID = queque[queque.length - 1]
@@ -248,16 +248,15 @@ global.comando = command
 
 if ((m.id.startsWith("NJX-") || (m.id.startsWith("BAE5") && m.id.length === 16) || (m.id.startsWith("B24E") && m.id.length === 20))) return
 
-if (global.db.data.chats[m.chat].primaryBot && global.db.data.chats[m.chat].primaryBot !== this.user.jid) {
-const primaryBotConn = global.conns.find(conn => conn.user.jid === global.db.data.chats[m.chat].primaryBot && conn.ws.socket && conn.ws.socket.readyState !== ws.CLOSED)
+if (global.db.data.chats[m.chat]?.primaryBot && global.db.data.chats[m.chat].primaryBot !== this.user.jid) {
+const primaryBotConn = global.conns?.find(conn => conn.user.jid === global.db.data.chats[m.chat].primaryBot && conn.ws.socket && conn.ws.socket.readyState !== ws.CLOSED)
 const participants = m.isGroup ? (await this.groupMetadata(m.chat).catch(() => ({ participants: [] }))).participants : []
 const primaryBotInGroup = participants.some(p => p.jid === global.db.data.chats[m.chat].primaryBot)
 if (primaryBotConn && primaryBotInGroup || global.db.data.chats[m.chat].primaryBot === global.conn.user.jid) {
 throw !1
 } else {
 global.db.data.chats[m.chat].primaryBot = null
-}} else {
-}
+}}
 
 if (!isAccept) continue
 m.plugin = name
