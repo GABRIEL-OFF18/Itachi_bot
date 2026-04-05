@@ -207,11 +207,13 @@ try {
 const file = global.__filename(join(pluginFolder, filename))
 const module = await import(file)
 global.plugins[filename] = module.default || module
-} catch {
+console.log(chalk.green(`Plugin cargado: ${filename}`))
+} catch (e) {
+console.error(chalk.red(`Error en plugin ${filename}:`), e)
 delete global.plugins[filename]
-}}
-}
-filesInit()
+}}}
+
+await filesInit()
 
 global.reload = async (_ev, filename) => {
 if (pluginFilter(filename)) {
