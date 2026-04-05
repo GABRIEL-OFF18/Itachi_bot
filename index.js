@@ -197,7 +197,7 @@ return true
 }
 
 await global.reloadHandler()
-const pluginFolder = global.__dirname(join(__dirname, './plugins/index'))
+const pluginFolder = global.__dirname(join(__dirname, './plugins'))
 const pluginFilter = (filename) => /\.js$/.test(filename)
 global.plugins = {}
 
